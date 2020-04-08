@@ -1,4 +1,4 @@
-module loggr
+module github.com/zhs/loggr
 
 go 1.14
 
