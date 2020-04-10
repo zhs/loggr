@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 type marker struct{}
@@ -16,9 +17,10 @@ func New(fields ...interface{}) *zap.SugaredLogger {
 	cfgEncoder := zap.NewProductionEncoderConfig()
 	cfgProd := zap.NewProductionConfig()
 
-	cfgEncoder.TimeKey = "@timestamp"
+	cfgEncoder.TimeKey = "ts"
 	cfgEncoder.MessageKey = "message"
-	cfgEncoder.LevelKey = "@level"
+	cfgEncoder.LevelKey = "level"
+	cfgEncoder.EncodeTime = zapcore.ISO8601TimeEncoder
 
 	cfgProd.EncoderConfig = cfgEncoder
 	lg, _ := cfgProd.Build()
