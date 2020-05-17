@@ -23,6 +23,7 @@ func New(fields ...interface{}) *zap.SugaredLogger {
 	cfgEncoder.EncodeTime = zapcore.ISO8601TimeEncoder
 
 	cfgProd.EncoderConfig = cfgEncoder
+	cfgProd.OutputPaths = []string{"stdout"}
 	lg, _ := cfgProd.Build()
 	if lg != nil {
 		defer func() {
